@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#0c1e4a"><link rel="apple-touch-icon" href="icon-192.png"><title>مرشد الطالب الرقمي | Digital Student Guide</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%90%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0c1e4a;--teal:#1f5fae;--gold:#e0ae3c;--red:#c8102e;--bg:#f3f6fb;--mut:#4a5a78;--card:#fff;--tx:#0c1e4a;--line:#d3dcea}
+body.dark{--bg:#0a1230;--card:#14224f;--tx:#eaf0ff;--mut:#a9b8dc;--line:#2b3b6e;--ink:#050b22}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Cairo,Tahoma,Arial,sans-serif;background:var(--bg);color:var(--tx);line-height:1.8;transition:background .3s}
+.w{max-width:960px;margin:auto;padding:0 18px}
+nav{position:sticky;top:0;z-index:5;background:var(--ink);border-bottom:3px solid var(--gold)}
+nav .w{display:flex;gap:10px;align-items:center;justify-content:space-between;padding-top:8px;padding-bottom:8px}
+nav b{color:#fff;font-weight:800}
+.tools{display:flex;gap:8px}
+.tl{font:inherit;font-weight:600;font-size:15px;background:none;border:2px solid var(--gold);color:var(--gold);border-radius:20px;padding:2px 14px;cursor:pointer}
+.hero{background:linear-gradient(135deg,var(--ink),var(--teal));color:#fff;padding:60px 0 70px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 22px,rgba(224,174,60,.08) 22px 24px);pointer-events:none}
+.hero .w{position:relative;z-index:1}
+.hero h1{font-size:clamp(30px,7vw,52px);line-height:1.3;margin:0 0 12px;font-weight:800}
+.hero p{font-size:19px;max-width:560px;color:#d3e0f5;margin:0 0 22px}
+.btn{font:inherit;font-weight:800;font-size:18px;background:var(--gold);color:#0c1e4a;border:0;border-radius:10px;padding:12px 28px;cursor:pointer;text-decoration:none;display:inline-block}
+.tl:focus-visible,.btn:focus-visible,.need:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.tipbox{margin-top:22px;max-width:560px;background:rgba(255,255,255,.12);border:2px dashed var(--gold);border-radius:14px;padding:12px 16px;min-height:64px}
+.tipbox button{font:inherit;font-weight:600;background:none;border:0;color:var(--gold);cursor:pointer;padding:0;text-decoration:underline}
+h2{font-size:28px;margin:46px 0 6px}
+.sub{color:var(--mut);margin:0 0 20px}
+.needs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.need{font:inherit;text-align:start;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:18px;cursor:pointer;color:var(--tx);transition:transform .15s,border-color .15s}
+.need:hover{transform:translateY(-3px);border-color:var(--teal)}
+.need[aria-pressed=true]{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
+.need .ic{font-size:34px;display:block}
+.need strong{font-size:19px;display:block}
+.need .d{color:var(--mut);font-size:15px}
+.panel{background:var(--card);border-radius:14px;padding:22px}
+#guide{margin-top:18px;border-inline-start:6px solid var(--gold);min-height:80px}
+#guide h3{margin:0 0 10px;font-size:23px}
+#guide ol{margin:0;padding:0;list-style:none;counter-reset:s}
+#guide li{counter-increment:s;position:relative;padding:8px 52px 8px 0;margin-bottom:6px}
+html[dir=ltr] #guide li{padding:8px 0 8px 52px}
+#guide li:before{content:counter(s);position:absolute;inset-inline-start:0;top:8px;width:36px;height:36px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:800}
+.tip{margin-top:12px;background:rgba(224,174,60,.18);border-radius:10px;padding:10px 14px}
+.dash{display:grid;grid-template-columns:200px 1fr;gap:22px;align-items:center}
+.ring{width:170px;height:170px;border-radius:50%;margin:auto;display:grid;place-items:center;background:conic-gradient(var(--gold) 0%,var(--line) 0)}
+.ring div{width:128px;height:128px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:34px;font-weight:800}
+.chk label{display:flex;gap:10px;align-items:flex-start;padding:6px 0;cursor:pointer}
+.chk input{width:22px;height:22px;margin-top:5px;accent-color:var(--teal)}
+#msg{font-weight:800;margin-top:8px;color:var(--gold)}
+.week{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:space-between;border:2px solid var(--gold)}
+.week h3{margin:0}
+.week p{margin:4px 0 0}
+.done{background:var(--ok,#1b7f4b);color:#fff}
+footer{background:var(--ink);color:#cfd9ef;text-align:center;padding:20px;margin-top:60px}
+#splash{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:linear-gradient(135deg,#0c1e4a,#1f5fae);transition:opacity .5s,visibility .5s}
+#splash.hide{opacity:0;visibility:hidden}
+#enter{font:inherit;background:none;border:0;color:#fff;cursor:pointer;text-align:center;padding:30px}
+#enter .gl{display:grid;place-items:center;width:150px;height:150px;margin:0 auto 18px;border-radius:50%;border:4px solid var(--gold);font-size:76px;background:rgba(255,255,255,.1);animation:pl 2s ease-in-out infinite}
+#enter strong{display:block;font-size:30px;font-weight:800}
+#enter small{display:block;color:var(--gold);font-size:18px;margin-top:6px}
+#enter:focus-visible{outline:3px solid var(--gold);outline-offset:6px;border-radius:20px}
+@keyframes pl{50%{transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){#enter .gl{animation:none}#splash{transition:none}}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.sc{background:var(--card);border-radius:14px;padding:18px;border-top:5px solid var(--gold)}
+.sc h3{margin:0 0 4px;font-size:20px}.sc b{color:var(--teal)}.sc p{margin:4px 0}
+body.dark .sc b{color:var(--gold)}
+.eco{display:grid;gap:12px}
+.eco input{font:inherit;font-size:20px;width:140px;padding:8px 12px;border-radius:10px;border:2px solid var(--gold);background:var(--bg);color:var(--tx)}
+.res{font-size:20px;font-weight:800;color:var(--teal)}
+body.dark .res{color:var(--gold)}
+.refs{margin:0;padding-inline-start:22px}
+/* حركة وتدرجات */
+body{background:linear-gradient(180deg,var(--bg),color-mix(in srgb,var(--teal) 12%,var(--bg)));background-attachment:fixed}
+nav{border-bottom:0;background:linear-gradient(90deg,var(--ink),#16357a,var(--ink))}
+nav:after{content:"";position:absolute;inset:auto 0 0 0;height:3px;background:linear-gradient(90deg,var(--gold),#ff8a5b,#7aa7ff,var(--gold));background-size:300% 100%;animation:flow 6s linear infinite}
+.hero{background:linear-gradient(120deg,#0c1e4a,#1f5fae,#5b3fa0,#1f5fae,#0c1e4a);background-size:300% 300%;animation:shift 14s ease-in-out infinite}
+.hero:before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 20% 30%,rgba(224,174,60,.35),transparent 28%),radial-gradient(circle at 80% 70%,rgba(122,167,255,.35),transparent 30%),radial-gradient(circle at 60% 15%,rgba(255,138,91,.25),transparent 22%);animation:drift 16s ease-in-out infinite alternate;pointer-events:none}
+.hero h1{background:linear-gradient(90deg,#fff,var(--gold),#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 7s linear infinite}
+h2{background:linear-gradient(90deg,var(--tx),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent;width:fit-content}
+body.dark h2{background:linear-gradient(90deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text}
+.btn{background:linear-gradient(90deg,var(--gold),#ffcf6b,var(--gold));background-size:200% auto;transition:background-position .4s,transform .2s,box-shadow .2s}
+.btn:hover{background-position:right center;transform:translateY(-2px);box-shadow:0 8px 20px rgba(224,174,60,.4)}
+.btn.done{background:#1b7f4b}
+.need{background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,var(--line),var(--line)) border-box}
+.need:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 12px 26px rgba(31,95,174,.25)}
+.need .ic{transition:transform .3s}.need:hover .ic{transform:scale(1.25) rotate(-8deg)}
+.need[aria-pressed=true]{background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,var(--gold),#ff8a5b,var(--teal)) border-box;border-color:transparent}
+.sc{border-top:0;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;animation:pop .6s both}
+.sc:before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--gold),#ff8a5b,var(--teal))}
+.sc:hover{transform:translateY(-6px);box-shadow:0 14px 28px rgba(31,95,174,.22)}
+.sc:nth-child(2){animation-delay:.08s}.sc:nth-child(3){animation-delay:.16s}.sc:nth-child(4){animation-delay:.24s}.sc:nth-child(5){animation-delay:.32s}.sc:nth-child(6){animation-delay:.4s}
+.sc{display:flex;flex-direction:column}
+.sc .tb{margin-top:auto;align-self:flex-start;font-size:16px;padding:8px 20px}
+.sc p:nth-of-type(2){margin-bottom:14px}
+.sc h3 span{display:inline-block;animation:bob 3s ease-in-out infinite}
+#guide li{animation:slide .45s both}#guide li:nth-child(2){animation-delay:.1s}#guide li:nth-child(3){animation-delay:.2s}#guide li:nth-child(4){animation-delay:.3s}
+.ring{box-shadow:0 0 0 6px rgba(224,174,60,.18);animation:glow 3s ease-in-out infinite}
+.tipbox{animation:glow 4s ease-in-out infinite}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}.rv.in{opacity:1;transform:none}
+footer{background:linear-gradient(90deg,var(--ink),#16357a,var(--ink))}
+@keyframes shift{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+@keyframes flow{to{background-position:200% 0}}
+@keyframes drift{from{transform:translate(-3%,-2%) rotate(0)}to{transform:translate(4%,3%) rotate(6deg)}}
+@keyframes pop{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes slide{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
+@keyframes bob{50%{transform:translateY(-4px)}}
+@keyframes glow{50%{box-shadow:0 0 0 10px rgba(224,174,60,.12),0 0 24px rgba(224,174,60,.3)}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+@media(max-width:640px){.dash{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.need,body{transition:none}html{scroll-behavior:auto}}
+.tg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.tg .panel{border:2px solid var(--line)}.tg h3{margin:0 0 10px;font-size:20px}
+.mm{font-size:56px;font-weight:800;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;line-height:1.2}
+body.dark .mm{color:var(--gold)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.sm{font-size:15px;padding:6px 18px}
+.tg input,.tg select{font:inherit;padding:6px 10px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--tx);min-width:0;flex:1}
+#plist{list-style:none;margin:0;padding:0}
+#plist li{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)}
+#plist .x{background:none;border:0;cursor:pointer;color:var(--red);font-size:16px}
+.qo{display:block;width:100%;font:inherit;text-align:start;margin:6px 0;padding:8px 12px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--tx);cursor:pointer}
+.qo.ok{background:#1b7f4b;color:#fff;border-color:#1b7f4b}.qo.bad{background:var(--red);color:#fff;border-color:var(--red)}
+#qfb,#qsc,#pst{font-weight:600;margin:6px 0 0}
+.panel select{font:inherit;padding:6px 10px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--tx);flex:1;min-width:0}.tg+.tg{margin-top:14px}.cr{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:4px 0}.cr input{flex:0 0 90px}
+</style>
+</head>
+<body>
+<div id="splash" role="dialog" aria-label="welcome"><button id="enter" aria-label="enter"><span class="gl">🌐</span><strong id="sn"></strong><small id="sd"></small></button></div>
+<nav><div class="w"><b id="brand"></b>
+<div class="tools"><button class="tl" id="bl"></button><button class="tl" id="bd"></button><button class="tl" id="bs"></button></div></div></nav>
+
+<header class="hero"><div class="w">
+<h1 id="h1"></h1><p id="hp"></p>
+<a class="btn" href="#needs" id="st"></a>
+<div class="tipbox"><div id="tipt"></div><button id="tipb"></button></div>
+</div></header>
+
+<main class="w">
+<h2 id="nh" ></h2><p class="sub" id="ns"></p>
+<div class="needs" id="nl"></div>
+<div id="guide" class="panel" aria-live="polite"></div>
+
+<h2 id="pfh"></h2><p class="sub" id="pfs"></p>
+<div class="panel"><div class="row"><select id="pgr"></select><select id="psy"></select><select id="ptk"></select></div><div id="pnote" style="color:var(--mut)"></div></div>
+<h2 id="th"></h2><p class="sub" id="ts"></p>
+<div class="tg">
+<div class="panel"><h3 id="pmh"></h3><div class="mm" id="ptm">25:00</div><div id="pph" style="text-align:center;color:var(--mut)"></div>
+<div class="row"><button class="btn sm" id="pgo"></button><button class="btn sm" id="prs"></button></div><div id="pst"></div></div>
+<div class="panel"><h3 id="plh"></h3><div class="row"><input id="pin" maxlength="30"><input id="pdt" type="date"><button class="btn sm" id="pad"></button></div><ul id="plist"></ul></div>
+<div class="panel"><h3 id="qh"></h3><div class="row"><select id="qsel"></select><button class="btn sm" id="qn"></button><button class="btn sm" id="qex"></button></div><div id="qb"></div><div id="qfb"></div><div id="qsc"></div><div id="qhs" style="color:var(--mut);margin-top:6px"></div></div>
+</div>
+
+<div class="tg"><div class="panel"><h3 id="calh"></h3><div id="cin"></div><div id="cout" style="font-weight:800;margin-top:8px"></div></div>
+<div class="panel"><h3 id="bk"></h3><p id="bkn"></p><div class="row"><button class="btn sm" id="bex"></button><label class="btn sm"><span id="bimt"></span><input type="file" id="bim" accept=".json" hidden></label></div></div></div>
+
+<h2 id="sjh"></h2><p class="sub" id="sjs"></p>
+<div class="sg" id="sg"></div>
+
+<h2 id="wh"></h2>
+<div class="panel week"><div><h3 id="wt"></h3><p id="wp"></p></div><button class="btn" id="wb"></button></div>
+
+<h2 id="sh"></h2><p class="sub" id="ss"></p>
+<div class="panel dash">
+<div class="ring" id="ring"><div id="pct">0%</div></div>
+<div><div class="chk" id="ck"></div><div id="msg"></div></div>
+</div>
+<h2 id="rh"></h2>
+<div class="panel"><ul class="refs" id="rl"></ul></div>
+</main>
+<footer id="ft"></footer>
+
+<script>
+var L={
+ar:{brand:"مرشد الطالب الرقمي",lang:"English",dark:"🌙 ليلي",light:"☀️ نهاري",share:"شارك",h1:"تعلّم أذكى، وابقَ آمنًا على الإنترنت",hp:"دليلك السريع لاستخدام منصات التعليم الرقمي في مصر وحماية حسابك وبياناتك، في خطوات واضحة.",st:"ابدأ الآن",tipb:"نصيحة أخرى",nh:"ماذا تريد أن تفعل اليوم؟",ns:"اضغط على احتياجك وسيظهر لك الدليل خطوة بخطوة.",pick:"اختر أحد الخيارات بالأعلى لتبدأ.",tp:"نصيحة: ",wh:"تحدي الأسبوع",wb:"أنجزت التحدي",wd:"أحسنت! تحدي هذا الأسبوع مكتمل ✅",sh:"لوحة أمانك الرقمي",ss:"علّم على العادات التي تلتزم بها فعلًا، وراقب نسبة أمانك.",m:["ابدأ بالعادات البسيطة وارفع نسبتك.","جيد، أكمل باقي العادات.","ممتاز! أنت مواطن رقمي آمن."],copied:"تم نسخ الرابط",
+sjh:"رقمنة موادك الدراسية",sjs:"أداة رقمية مجانية تساعدك في كل مادة، وكيف تستفيد منها.",
+SJ:[{s:"الفيزياء",i:"⚡",t:"محاكيات PhET",u:"جرّب الكهربية والمغناطيسية والضوء والفيزياء الحديثة، وغيّر القيم وشاهد النتيجة.",l:"https://phet.colorado.edu/"},
+{s:"الكيمياء",i:"🧪",t:"الجدول الدوري التفاعلي Ptable",u:"خصائص كل عنصر وتوزيعه الإلكتروني ومركباته في مكان واحد.",l:"https://ptable.com/"},
+{s:"الأحياء",i:"🧬",t:"Learn.Genetics من جامعة يوتا",u:"نماذج تفاعلية للـ DNA والوراثة والخلية وتخليق البروتين.",l:"https://learn.genetics.utah.edu/"},
+{s:"التفاضل والتكامل",i:"📈",t:"حاسبة Desmos البيانية",u:"ارسم الدوال وشاهد المماس والمساحة تحت المنحنى لتفهم التفاضل والتكامل.",l:"https://www.desmos.com/calculator"},
+{s:"الهندسة الفراغية والاستاتيكا",i:"📐",t:"GeoGebra ثلاثي الأبعاد",u:"ارسم المجسمات والمتجهات وحرّكها لتفهم الفراغ والقوى.",l:"https://www.geogebra.org/3d"},
+{s:"شرح الرياضيات والعلوم",i:"🎓",t:"أكاديمية خان بالعربية",u:"فيديوهات وتمارين مجانية لتأسيس الجبر والفيزياء والكيمياء.",l:"https://ar.khanacademy.org/"},
+{s:"الجيولوجيا",i:"🪨",t:"موقع Mindat",u:"صور وخصائص المعادن والصخور للمقارنة بينها في المراجعة.",l:"https://www.mindat.org/"},
+{s:"التاريخ",i:"🏛️",t:"Google Arts & Culture",u:"جولات افتراضية في المتاحف والآثار ومعارض عن الحضارات.",l:"https://artsandculture.google.com/"},
+{s:"الجغرافيا",i:"🌍",t:"Google Earth",u:"شاهد التضاريس والمدن والأنهار على خريطة حقيقية.",l:"https://earth.google.com/web/"},
+{s:"اللغة العربية",i:"📖",t:"معجم المعاني",u:"معاني الكلمات والمرادفات والأضداد والجموع لمراجعة النصوص.",l:"https://www.almaany.com/"},
+{s:"اللغة الإنجليزية",i:"🗣️",t:"LearnEnglish Teens",u:"قراءة واستماع وقواعد من المجلس الثقافي البريطاني.",l:"https://learnenglishteens.britishcouncil.org/"},
+{s:"اللغة الفرنسية",i:"🇫🇷",t:"Apprendre le français",u:"تمارين استماع وقراءة وقواعد من TV5Monde.",l:"https://apprendre.tv5monde.com/"},
+{s:"اللغة الألمانية",i:"🇩🇪",t:"DW Learn German",u:"دورة مجانية بالفيديو والتمارين من الإذاعة الألمانية.",l:"https://learngerman.dw.com/"},
+{s:"الفلسفة وعلم النفس والاجتماع",i:"💭",t:"بنك المعرفة المصري",u:"مراجع ومقالات موثوقة للمراجعة والأبحاث.",l:"https://www.ekb.eg/"},
+{s:"كل المواد",i:"📚",t:"بوابة التعليم الإلكتروني",u:"شرح واختبارات المنهج المصري لكل المواد.",l:"https://study.ekb.eg/"},
+{s:"البرمجة",i:"💻",t:"Code.org",u:"دروس برمجة تفاعلية من الصفر مع تمارين مباشرة.",l:"https://code.org/"},
+{s:"الذكاء الاصطناعي",i:"🤖",t:"Teachable Machine من Google",u:"درّب نموذج ذكاء اصطناعي على الصور أو الصوت بدون كتابة كود.",l:"https://teachablemachine.withgoogle.com/"},
+{s:"المحاسبة والاقتصاد وإدارة الأعمال",i:"💼",t:"أكاديمية خان: الاقتصاد والتمويل",u:"شرح مبسّط للعرض والطلب والتضخم والمحاسبة (بالإنجليزية).",l:"https://www.khanacademy.org/economics-finance-domain"},
+{s:"الإحصاء",i:"📊",t:"أكاديمية خان: الإحصاء والاحتمالات",u:"المتوسط والوسيط والانحراف والاحتمالات بتمارين محلولة.",l:"https://www.khanacademy.org/math/statistics-probability"},
+{s:"علم النفس",i:"🧠",t:"Simply Psychology",u:"شرح النظريات والتجارب النفسية الشهيرة (بالإنجليزية).",l:"https://www.simplypsychology.org/"}],
+eh:"حاسبة توفير الورق",es:"كم ورقة وشجرة تحميها حين تذاكر من الشاشة؟",el:"كم ورقة تطبع في الأسبوع؟",
+er:function(p,y,t){return "توفر نحو "+y+" ورقة في السنة، أي تقريبًا "+t+" شجرة."},en_:"تقدير تقريبي: الشجرة الواحدة تعطي نحو ٨٠٠٠ ورقة.",
+rh:"المصادر والمراجع",R:["بنك المعرفة المصري: www.ekb.eg","بوابة التعليم الإلكتروني: study.ekb.eg","وزارة التربية والتعليم والتعليم الفني: moe.gov.eg","محاكيات PhET من جامعة كولورادو: phet.colorado.edu","برنامج GeoGebra: www.geogebra.org","Desmos: www.desmos.com","أكاديمية خان بالعربية: ar.khanacademy.org","Mindat للمعادن والصخور: www.mindat.org"],ft:"مشروع لمسابقة «مصر الرقمية» للعام الدراسي ٢٠٢٦ | إدارة تنمية مادة الكمبيوتر التعليمي",
+N:[{i:"🔎",t:"أبحث عن مصدر علمي",d:"لمشروع أو بحث",s:["افتح بنك المعرفة المصري من العنوان www.ekb.eg.","أنشئ حسابًا مجانيًا أو سجّل الدخول.","اكتب كلمات البحث الواضحة، مثل «الطاقة الشمسية».","اختر المصدر الموثوق، واكتب اسمه وعنوانه لتذكره في بحثك."],p:"لا تنسخ الكلام كما هو. اكتبه بأسلوبك واذكر المصدر."},
+{i:"📚",t:"أذاكر وأتدرب",d:"دروس واختبارات",s:["ادخل إلى بوابة التعليم الإلكتروني study.ekb.eg بحساب الطالب.","اختر المادة والدرس الذي تريده.","شاهد الشرح، ودوّن ملاحظاتك.","جرّب اختبارًا تدريبيًا وراجع إجاباتك الخاطئة."],p:"التدريب على الاختبارات الإلكترونية قبل الامتحان يقلل التوتر."},
+{i:"🛡️",t:"أحمي حسابي",d:"كلمة سر وبيانات",s:["اختر كلمة سر طويلة فيها حروف وأرقام ورموز.","لا تشاركها مع أحد، حتى الأصدقاء.","لا تضغط على روابط غريبة تعدك بجوائز.","سجّل الخروج بعد الانتهاء على الأجهزة المشتركة."],p:"إذا شككت في حسابك غيّر كلمة السر فورًا وأخبر معلمك."},
+{i:"✅",t:"أتأكد من خبر",d:"قبل التصديق والنشر",s:["انظر من كتب الخبر، هل المصدر رسمي ومعروف؟","ابحث عنه في موقع المدرسة أو صفحة الوزارة الرسمية.","قارن بين أكثر من مصدر موثوق.","لا تنشره قبل أن تتأكد منه."],p:"الشائعة تنتشر أسرع من الحقيقة. كن أنت من يوقفها."}],
+C:["كلمة سري طويلة ومعقدة","لا أشارك كلمة سري مع أحد","لا أضغط على الروابط المجهولة","أتأكد من الأخبار قبل نشرها","أسجّل الخروج من الأجهزة المشتركة","أستخدم المصادر الرسمية في المذاكرة"],
+T:["كلمة السر مثل فرشاة الأسنان، لا تشاركها مع أحد.","قبل أن تضغط على أي رابط، اسأل: من أرسله ولماذا؟","ابحث في بنك المعرفة قبل أي موقع مجهول.","الخبر الذي بلا مصدر رسمي لا تنشره.","جرّب اختبارًا تدريبيًا قبل كل امتحان إلكتروني.","سجّل الخروج دائمًا من الأجهزة المشتركة."],
+W:[["غيّر كلمة سر حسابك الدراسي إلى جملة طويلة.","ابحث عن موضوع في بنك المعرفة واكتب مصدره.","اشرح لأحد أفراد أسرتك كيف يعرف رسالة النصب.","تأكد من خبر قبل أن تنشره."]]},
+en:{brand:"Digital Student Guide",lang:"عربي",dark:"🌙 Dark",light:"☀️ Light",share:"Share",h1:"Learn smarter, stay safe online",hp:"Your quick guide to Egypt's digital learning platforms and to protecting your account and data, in clear steps.",st:"Start now",tipb:"Another tip",nh:"What do you want to do today?",ns:"Pick your need and the guide appears step by step.",pick:"Choose one of the options above to begin.",tp:"Tip: ",wh:"Challenge of the week",wb:"I did it",wd:"Well done! This week's challenge is complete ✅",sh:"Your digital safety dashboard",ss:"Tick the habits you really follow and watch your safety score.",m:["Start with the easy habits and raise your score.","Good, keep going with the rest.","Excellent! You are a safe digital citizen."],copied:"Link copied",
+sjh:"Digitizing your school subjects",sjs:"A free digital tool that helps with each subject, and how to use it.",
+SJ:[{s:"Physics",i:"⚡",t:"PhET simulations",u:"Try electricity, magnetism, light and modern physics; change values and see the result.",l:"https://phet.colorado.edu/"},
+{s:"Chemistry",i:"🧪",t:"Ptable interactive periodic table",u:"Each element's properties, electron configuration and compounds in one place.",l:"https://ptable.com/"},
+{s:"Biology",i:"🧬",t:"Learn.Genetics (University of Utah)",u:"Interactive models of DNA, heredity, the cell and protein synthesis.",l:"https://learn.genetics.utah.edu/"},
+{s:"Calculus",i:"📈",t:"Desmos graphing calculator",u:"Plot functions and see tangents and area under curves to understand calculus.",l:"https://www.desmos.com/calculator"},
+{s:"Solid geometry and Statics",i:"📐",t:"GeoGebra 3D",u:"Draw solids and vectors and move them to understand space and forces.",l:"https://www.geogebra.org/3d"},
+{s:"Math and science lessons",i:"🎓",t:"Khan Academy Arabic",u:"Free videos and exercises to build algebra, physics and chemistry basics.",l:"https://ar.khanacademy.org/"},
+{s:"Geology",i:"🪨",t:"Mindat",u:"Photos and properties of minerals and rocks to compare while revising.",l:"https://www.mindat.org/"},
+{s:"History",i:"🏛️",t:"Google Arts & Culture",u:"Virtual tours of museums and monuments and exhibits on civilizations.",l:"https://artsandculture.google.com/"},
+{s:"Geography",i:"🌍",t:"Google Earth",u:"See terrain, cities and rivers on a real map.",l:"https://earth.google.com/web/"},
+{s:"Arabic",i:"📖",t:"Almaany dictionary",u:"Meanings, synonyms, antonyms and plurals to revise texts.",l:"https://www.almaany.com/"},
+{s:"English",i:"🗣️",t:"LearnEnglish Teens",u:"Reading, listening and grammar from the British Council.",l:"https://learnenglishteens.britishcouncil.org/"},
+{s:"French",i:"🇫🇷",t:"Apprendre le français",u:"Listening, reading and grammar exercises from TV5Monde.",l:"https://apprendre.tv5monde.com/"},
+{s:"German",i:"🇩🇪",t:"DW Learn German",u:"A free video and exercise course from Deutsche Welle.",l:"https://learngerman.dw.com/"},
+{s:"Philosophy, Psychology and Sociology",i:"💭",t:"Egyptian Knowledge Bank",u:"Trusted references and articles for revision and research.",l:"https://www.ekb.eg/"},
+{s:"All subjects",i:"📚",t:"E-learning portal",u:"Explanations and tests for the Egyptian curriculum.",l:"https://study.ekb.eg/"},
+{s:"Programming",i:"💻",t:"Code.org",u:"Interactive coding lessons from scratch with live exercises.",l:"https://code.org/"},
+{s:"Artificial Intelligence",i:"🤖",t:"Google Teachable Machine",u:"Train an AI model on images or sound with no code.",l:"https://teachablemachine.withgoogle.com/"},
+{s:"Accounting, Economics and Business",i:"💼",t:"Khan Academy: Economics and Finance",u:"Simple lessons on supply and demand, inflation and accounting.",l:"https://www.khanacademy.org/economics-finance-domain"},
+{s:"Statistics",i:"📊",t:"Khan Academy: Statistics and Probability",u:"Mean, median, deviation and probability with solved exercises.",l:"https://www.khanacademy.org/math/statistics-probability"},
+{s:"Psychology",i:"🧠",t:"Simply Psychology",u:"Famous psychological theories and experiments explained.",l:"https://www.simplypsychology.org/"}],
+eh:"Paper-saving calculator",es:"How many sheets and trees do you protect when you study on screen?",el:"How many pages do you print per week?",
+er:function(p,y,t){return "You save about "+y+" sheets a year, roughly "+t+" tree(s)."},en_:"Rough estimate: one tree yields about 8,000 sheets.",
+rh:"Sources and references",R:["Egyptian Knowledge Bank: www.ekb.eg","E-learning portal: study.ekb.eg","Ministry of Education and Technical Education: moe.gov.eg","PhET simulations, University of Colorado: phet.colorado.edu","GeoGebra: www.geogebra.org","Desmos: www.desmos.com","Khan Academy Arabic: ar.khanacademy.org","Mindat (minerals and rocks): www.mindat.org"],ft:"A project for the \"Digital Egypt\" competition, school year 2026 | Educational Computer Subject Development Dept.",
+N:[{i:"🔎",t:"Find a reliable source",d:"For a project or research",s:["Open the Egyptian Knowledge Bank at www.ekb.eg.","Create a free account or sign in.","Type clear keywords, such as \"solar energy\".","Choose a trusted source and note its name and address to cite it."],p:"Don't copy word for word. Write in your own words and cite the source."},
+{i:"📚",t:"Study and practice",d:"Lessons and tests",s:["Go to the e-learning portal study.ekb.eg with your student account.","Choose the subject and lesson.","Watch the explanation and take notes.","Try a practice test and review your mistakes."],p:"Practicing e-exams before the real one lowers stress."},
+{i:"🛡️",t:"Protect my account",d:"Passwords and data",s:["Pick a long password with letters, numbers and symbols.","Never share it, even with friends.","Don't click strange links that promise prizes.","Log out after using shared devices."],p:"If you suspect your account, change the password now and tell your teacher."},
+{i:"✅",t:"Check a news item",d:"Before believing or sharing",s:["Who wrote it? Is the source official and known?","Look for it on the school site or the ministry's official page.","Compare more than one trusted source.","Don't share it before you're sure."],p:"Rumors travel faster than truth. Be the one who stops them."}],
+C:["My password is long and complex","I never share my password","I don't click unknown links","I verify news before sharing","I log out of shared devices","I use official sources to study"],
+T:["A password is like a toothbrush: never share it.","Before clicking a link, ask: who sent it and why?","Search the Knowledge Bank before unknown sites.","Don't share news that has no official source.","Try a practice test before every e-exam.","Always log out of shared devices."],
+W:[["Change your study account password to a long sentence.","Look up a topic in the Knowledge Bank and write its source.","Explain to a family member how to spot a scam message.","Verify a news item before sharing it."]]}
+};
+var lg="ar",sel=-1,ti=0,wk=0,$=function(x){return document.getElementById(x)},
+st=function(){try{return window.localStorage}catch(e){return null}};
+var wkEn=["Change your study account password to a long sentence.","Look up a topic in the Knowledge Bank and write its source.","Explain to a family member how to spot a scam message.","Verify a news item before sharing it."];
+var wkAr=L.ar.W[0],wi=Math.floor(Date.now()/604800000)%4,wKey="wk"+Math.floor(Date.now()/604800000);
+function done(){var s=st();try{return s&&s.getItem(wKey)==="1"}catch(e){return false}}
+function render(){
+ var d=L[lg];document.documentElement.lang=lg;document.documentElement.dir=lg==="ar"?"rtl":"ltr";
+ $("brand").textContent=d.brand;$("sn").textContent=d.brand;$("sd").textContent=lg==="ar"?"اضغط على الأيقونة للدخول إلى الموقع":"Tap the icon to enter the site";$("bl").textContent=d.lang;$("bd").textContent=document.body.classList.contains("dark")?d.light:d.dark;$("bs").textContent=d.share;
+ ["h1","hp","st","tipb","nh","ns","wh","sh","ss"].forEach(function(k){$(k).textContent=d[k]});$("ft").textContent=d.ft;
+ $("tipt").textContent=d.tp+d.T[ti%d.T.length];
+ ["sjh","sjs","rh"].forEach(function(k){$(k).textContent=d[k]});
+ var IC=["🔬","📐","📖","🗣️","🌍","🏛️"],UR=["https://phet.colorado.edu/","https://www.geogebra.org/","https://www.almaany.com/","https://www.oxfordlearnersdictionaries.com/","https://earth.google.com/web/","https://www.ekb.eg/"];
+ $("sjh").textContent="💻 "+d.sjh;
+ $("sg").innerHTML=d.SJ.map(function(x,k){if(!vis(k))return"";return'<div class="sc"><h3><span aria-hidden="true">'+x.i+"</span> "+x.s+"</h3><p><b>"+x.t+"</b></p><p>"+x.u+'</p><a class="btn tb" href="'+x.l+'" target="_blank" rel="noopener">'+(lg==="ar"?"افتح الأداة 🔗":"Open the tool 🔗")+"</a></div>"}).join("");
+ $("rl").innerHTML=d.R.map(function(x){return"<li>"+x+"</li>"}).join("");
+ $("wt").textContent=lg==="ar"?wkAr[wi]:wkEn[wi];
+ $("wp").textContent=done()?d.wd:"";$("wb").textContent=d.wb;$("wb").className="btn"+(done()?" done":"");
+ $("nl").innerHTML="";
+ d.N.forEach(function(n,k){var b=document.createElement("button");b.className="need";b.setAttribute("aria-pressed",k===sel);
+  b.innerHTML='<span class="ic">'+n.i+"</span><strong>"+n.t+'</strong><span class="d">'+n.d+"</span>";
+  b.onclick=function(){sel=k;render()};$("nl").appendChild(b)});
+ var g=$("guide");
+ if(sel<0)g.innerHTML='<p style="margin:0;color:var(--mut)">'+d.pick+"</p>";
+ else{var n=d.N[sel];g.innerHTML="<h3>"+n.t+"</h3><ol>"+n.s.map(function(x){return"<li>"+x+"</li>"}).join("")+'</ol><div class="tip">'+d.tp+n.p+"</div>"}
+ var old=[].map.call(document.querySelectorAll("#ck input"),function(i){return i.checked});
+ $("ck").innerHTML="";
+ d.C.forEach(function(c,k){var l=document.createElement("label");l.innerHTML='<input type="checkbox"><span>'+c+"</span>";
+  l.firstChild.checked=!!old[k];l.firstChild.onchange=upd;$("ck").appendChild(l)});
+ upd();render2();
+}
+function upd(){
+ var d=L[lg],n=document.querySelectorAll("#ck input:checked").length,p=Math.round(n/d.C.length*100);
+ $("ring").style.background="conic-gradient(var(--gold) "+p+"%,var(--line) 0)";$("pct").textContent=p+"%";
+ $("msg").textContent=p===100?d.m[2]:p>=50?d.m[1]:d.m[0];
+}
+$("enter").onclick=function(){$("splash").classList.add("hide");window.scrollTo(0,0)};
+$("bl").onclick=function(){lg=lg==="ar"?"en":"ar";render()};
+$("bd").onclick=function(){document.body.classList.toggle("dark");render()};
+$("tipb").onclick=function(){ti++;render()};
+$("wb").onclick=function(){var s=st();try{s&&s.setItem(wKey,"1")}catch(e){}$("wp").textContent=L[lg].wd;$("wb").className="btn done"};
+$("bs").onclick=function(){
+ var u=location.href;
+ if(navigator.share){navigator.share({title:document.title,url:u}).catch(function(){})}
+ else if(navigator.clipboard){navigator.clipboard.writeText(u).then(function(){$("bs").textContent=L[lg].copied})}
+};
+var T2={ar:{th:"أدوات المذاكرة اليومية",ts:"مؤقت وجدول امتحانات وبنك أسئلة، وكلها محفوظة على جهازك.",pmh:"⏱️ مؤقت المذاكرة",go:"ابدأ",pa:"إيقاف",rs:"إعادة",f:"وقت التركيز (25 دقيقة)",b:"وقت الراحة (5 دقائق)",tod:"جلسات اليوم: ",wk:" | دقائق هذا الأسبوع: ",plh:"📅 منظم الامتحانات",sub:"المادة",add:"أضف",dl:" يوم متبقي",td:"الامتحان اليوم!",ov:"انتهى",em:"أضف مادة وتاريخ امتحانها.",qh:"🧠 بنك الأسئلة",al:"كل المواد",nx:"سؤال جديد",ok:"✅ إجابة صحيحة!",no:"❌ خطأ، الصحيح: ",sc:"نتيجتك: "},
+en:{th:"Daily study tools",ts:"A timer, exam planner and question bank, all saved on your device.",pmh:"⏱️ Study timer",go:"Start",pa:"Pause",rs:"Reset",f:"Focus time (25 min)",b:"Break time (5 min)",tod:"Today's sessions: ",wk:" | Minutes this week: ",plh:"📅 Exam planner",sub:"Subject",add:"Add",dl:" days left",td:"Exam today!",ov:"Done",em:"Add a subject and its exam date.",qh:"🧠 Question bank (Arabic)",al:"All subjects",nx:"New question",ok:"✅ Correct!",no:"❌ Wrong. Correct: ",sc:"Score: "}};
+var Q=[["البرمجة والذكاء الاصطناعي","الحلقة التكرارية (Loop) تُستخدم من أجل:",["تعريف متغير فقط","تكرار تنفيذ مجموعة أوامر","إنهاء البرنامج","طباعة الأخطاء"],1],
+["البرمجة والذكاء الاصطناعي","تعلّم الآلة (Machine Learning) يعني أن النظام:",["يعمل بدون بيانات","يتعلم من البيانات ويحسّن أداءه","لا يحتاج حاسوبًا","ينسخ برامج أخرى"],1],
+["المحاسبة","المعادلة المحاسبية الأساسية:",["الأصول = الخصوم + حقوق الملكية","الأصول = الإيرادات − المصروفات","الخصوم = الأصول + الأرباح","حقوق الملكية = الخصوم"],0],
+["المحاسبة","أي مما يلي يُعد من الأصول؟",["القروض المستحقة","رأس المال","النقدية بالصندوق","الإيرادات"],2],
+["إدارة الأعمال","وظائف الإدارة الأساسية هي:",["البيع والشراء","التخطيط والتنظيم والتوجيه والرقابة","الإنتاج والتوزيع فقط","المحاسبة والتسويق"],1],
+["إدارة الأعمال","يقيّم تحليل SWOT:",["الأسعار فقط","نقاط القوة والضعف والفرص والتهديدات","عدد العاملين","حجم الأرباح"],1],
+["علم النفس","أنشأ فونت أول معمل لعلم النفس التجريبي عام:",["1789","1879","1929","1969"],1],
+["علم النفس","المنبه الشرطي في تجربة بافلوف هو:",["الطعام","صوت الجرس","لعاب الكلب","الجوع"],1],
+["الاقتصاد","إذا زاد الطلب وبقي العرض ثابتًا يميل السعر إلى:",["الانخفاض","الارتفاع","الثبات التام","الصفر"],1],
+["الاقتصاد","التضخم هو:",["انخفاض الأسعار","ارتفاع عام ومستمر في مستوى الأسعار","زيادة الصادرات","نقص الوظائف"],1],
+["الإحصاء","الوسيط للقيم 3 ، 5 ، 9 هو:",["3","5","9","17"],1],
+["الإحصاء","المتوسط الحسابي للقيم 2 ، 4 ، 6 هو:",["3","4","5","6"],1],
+["الفيزياء","وحدة قياس المقاومة الكهربية هي:",["الفولت","الأوم","الأمبير","الواط"],1],
+["الفيزياء","يعبَّر عن قانون أوم بالعلاقة:",["ج = ت × ق","ت = ج × م","ج = ت × م","م = ج × ت"],2],
+["الفيزياء","وحدة قياس التردد هي:",["الهرتز","الجول","النيوتن","الباسكال"],0],
+["الكيمياء","العدد الذري لأي عنصر يساوي عدد:",["النيوترونات","البروتونات","الجزيئات","مستويات الطاقة"],1],
+["الكيمياء","قيمة pH للمحلول المتعادل عند 25°س:",["صفر","7","14","1"],1],
+["الكيمياء","الصيغة العامة للألكانات:",["CnH2n","CnH2n-2","CnH2n+2","CnHn"],2],
+["الأحياء","القاعدة النيتروجينية التي تقترن بالأدينين في DNA هي:",["الجوانين","السيتوزين","الثايمين","اليوراسيل"],2],
+["الأحياء","الوحدة التركيبية والوظيفية في الكلية هي:",["النيفرون","الحويصلة","الكبيبة فقط","الحالب"],0],
+["الأحياء","العضية المسؤولة عن إنتاج معظم الطاقة ATP في الخلية:",["الريبوسوم","الميتوكوندريا","جهاز جولجي","النواة"],1],
+["الرياضيات","مشتقة الدالة د(س) = س² هي:",["س","2س","س²","2"],1],
+["الرياضيات","تكامل 2س بالنسبة إلى س يساوي:",["س² + ث","2 + ث","2س² + ث","س + ث"],0],
+["الرياضيات","جا²θ + جتا²θ =",["صفر","2","1","جتا 2θ"],2],
+["التاريخ","في أي عام قامت ثورة يوليو في مصر؟",["1948","1952","1956","1967"],1],
+["التاريخ","حدثت حرب أكتوبر المجيدة عام:",["1967","1969","1973","1979"],2],
+["الجغرافيا","تربط قناة السويس بين:",["المتوسط والأحمر","الأحمر والأطلسي","المتوسط والأطلسي","الأحمر والهندي"],0],
+["الجغرافيا","أكبر دولة عربية من حيث المساحة:",["السعودية","السودان","الجزائر","ليبيا"],2],
+["الجيولوجيا","تتكون الصخور النارية من:",["تماسك الرواسب","تبريد الصهير","تحول صخور قديمة","تراكم بقايا الكائنات"],1],
+["الجيولوجيا","أقسى معدن في مقياس موس للصلادة:",["الكوارتز","الكالسيت","الألماس","التلك"],2],
+["اللغة العربية","حكم الفاعل في الجملة الفعلية:",["منصوب","مرفوع","مجرور","مجزوم"],1],
+["اللغة العربية","«ما أجمل السماءَ!» أسلوب:",["استفهام","تعجب","نداء","نهي"],1],
+["اللغة الأجنبية الأولى","If I ___ you, I would study harder.",["am","was","were","be"],2],
+["اللغة الأجنبية الأولى","She has lived here ___ 2010.",["for","since","from","at"],1]];
+var qc=null,qd=false,qa=0,qt=0,pS=1500,pB=false,pE=0,pI=null,PL=[];
+try{PL=JSON.parse(st().getItem("plan"))||[]}catch(e){}
+function gv(k){try{return+st().getItem(k)||0}catch(e){return 0}}
+function sv(k,v){try{st().setItem(k,v)}catch(e){}}
+function dK(){return"pd"+Math.floor(Date.now()/864e5)}
+function wK(){return"pm"+Math.floor(Date.now()/604800000)}
+function fm(s){s=Math.max(0,s);return("0"+Math.floor(s/60)).slice(-2)+":"+("0"+s%60).slice(-2)}
+function pUp(){var t=T2[lg];$("ptm").textContent=fm(pS);$("pgo").textContent=pI?t.pa:t.go;$("pph").textContent=pB?t.b:t.f;$("pst").textContent=t.tod+gv(dK())+t.wk+gv(wK())}
+function pTick(){pS=Math.round((pE-Date.now())/1000);
+ if(pS<=0){if(!pB){sv(dK(),gv(dK())+1);sv(wK(),gv(wK())+25)}pB=!pB;pS=pB?300:1500;pE=Date.now()+pS*1000;try{navigator.vibrate&&navigator.vibrate(300)}catch(e){}}pUp()}
+$("pgo").onclick=function(){if(pI){clearInterval(pI);pI=null}else{pE=Date.now()+pS*1000;pI=setInterval(pTick,500)}pUp()};
+$("prs").onclick=function(){clearInterval(pI);pI=null;pB=false;pS=1500;pUp()};
+function plR(){var t=T2[lg],u=$("plist"),t0=new Date().setHours(0,0,0,0);
+ PL.sort(function(a,b){return a.d<b.d?-1:1});u.innerHTML=PL.length?"":"<li>"+t.em+"</li>";
+ PL.forEach(function(x,i){var n=Math.round((new Date(x.d+"T00:00:00")-t0)/864e5),li=document.createElement("li"),b=document.createElement("span"),r=document.createElement("button");
+  b.textContent=x.s+" — "+(n<0?t.ov:n===0?t.td:n+t.dl);r.className="x";r.textContent="✖";r.setAttribute("aria-label","delete");
+  r.onclick=function(){PL.splice(i,1);sv("plan",JSON.stringify(PL));plR()};li.appendChild(b);li.appendChild(r);u.appendChild(li)})}
+$("pad").onclick=function(){var s=$("pin").value.trim(),d=$("pdt").value;if(s&&d){PL.push({s:s,d:d});sv("plan",JSON.stringify(PL));$("pin").value="";plR()}};
+function qNew(){EX=null;var f=$("qsel").value,p=Q.filter(function(q){return f?q[0]===f:vis2(q[0])});qc=p[Math.floor(Math.random()*p.length)];qd=false;$("qfb").textContent="";qD()}
+function qD(){if(EX)return;var t=T2[lg],b=$("qb");b.innerHTML="";if(!qc)return;
+ var h=document.createElement("p");h.style.fontWeight="800";h.textContent=qc[0]+": "+qc[1];b.appendChild(h);
+ qc[2].forEach(function(o,i){var x=document.createElement("button");x.className="qo";x.textContent=o;
+  x.onclick=function(){if(qd)return;qd=true;qt++;
+   if(i===qc[3]){qa++;x.classList.add("ok");$("qfb").textContent=t.ok}else{x.classList.add("bad");b.children[qc[3]+1].classList.add("ok");$("qfb").textContent=t.no+qc[2][qc[3]]}
+   $("qsc").textContent=t.sc+qa+"/"+qt};b.appendChild(x)})}
+$("qsel").onchange=qNew;$("qn").onclick=qNew;
+function render2(){var t=T2[lg];["th","ts","pmh","plh","qh"].forEach(function(k){$(k).textContent=t[k]});
+ $("prs").textContent=t.rs;$("pad").textContent=t.add;$("pin").placeholder=t.sub;$("qn").textContent=t.nx;
+ var v=$("qsel").value,s=[];Q.forEach(function(q){if(s.indexOf(q[0])<0&&vis2(q[0]))s.push(q[0])});
+ $("qsel").innerHTML='<option value="">'+t.al+"</option>"+s.map(function(x){return'<option value="'+x+'">'+x+"</option>"}).join("");$("qsel").value=v;
+ pUp();plR();render3();if(!qc)qNew();else qD()}
+var CORE=["اللغة العربية","اللغة الأجنبية الأولى","التاريخ"];
+var TR={bac:{med:{n:"الطب وعلوم الحياة",s2:["الفيزياء","الرياضيات"],s3:["الأحياء","الكيمياء"]},eng:{n:"الهندسة وعلوم الحاسب",s2:["الكيمياء","البرمجة والذكاء الاصطناعي"],s3:["الرياضيات","الفيزياء"]},biz:{n:"الأعمال",s2:["المحاسبة","إدارة الأعمال"],s3:["الاقتصاد","الرياضيات"]},art:{n:"الآداب والفنون",s2:["علم النفس","اللغة الأجنبية الثانية"],s3:["الجغرافيا","الإحصاء"]}},
+gen:{sci:{n:"علمي علوم",m:["اللغة العربية","اللغة الأجنبية الأولى","اللغة الأجنبية الثانية","الفيزياء","الكيمياء","الأحياء"]},math:{n:"علمي رياضة",m:["اللغة العربية","اللغة الأجنبية الأولى","اللغة الأجنبية الثانية","الفيزياء","الكيمياء","الرياضيات"]},lit:{n:"أدبي",m:["اللغة العربية","اللغة الأجنبية الأولى","اللغة الأجنبية الثانية","التاريخ","الجغرافيا","الفلسفة والمنطق","علم النفس","الإحصاء"]}}};
+var SK={"الفيزياء":[0,4,5],"الكيمياء":[1,5],"الأحياء":[2],"الرياضيات":[3,4,5],"التاريخ":[7],"الجغرافيا":[8],"الجيولوجيا":[6],"اللغة العربية":[9],"اللغة الأجنبية الأولى":[10],"اللغة الأجنبية الثانية":[11,12],"البرمجة والذكاء الاصطناعي":[15,16],"المحاسبة":[17],"إدارة الأعمال":[17],"الاقتصاد":[17],"الإحصاء":[18],"علم النفس":[19,13],"الفلسفة والمنطق":[13]};
+var T3={ar:{pfh:"اختر صفك ومسارك",pfs:"هنعرض لك موادك وأدواتك وأسئلتك فقط، وهتتحفظ اختياراتك على جهازك.",g1:"الصف الأول",g2:"الصف الثاني",g3:"الصف الثالث",bac:"البكالوريا",gen:"الثانوية العامة",trk:"اختر المسار",note:"مواد الثانوية العامة هنا حسب النظام المعروف، راجعها مع مدرستك.",ex:"اختبار تجريبي (10 أسئلة)",exr:"نتيجة الاختبار: ",exw:"أسئلة أخطأت فيها:",hist:"آخر نتائجك",calh:"🧮 حاسبة مجموع البكالوريا (من 600)",calt:"المجموع: ",bk:"💾 نسخة احتياطية",bkn:"صدّر بياناتك واحتفظ بالملف، واستورده لو غيّرت الجهاز أو مسحت المتصفح.",exp:"تصدير بياناتي",imp:"استيراد"},
+en:{pfh:"Choose your grade and track",pfs:"We show only your subjects, tools and questions; your choices are saved on your device.",g1:"Grade 1",g2:"Grade 2",g3:"Grade 3",bac:"Baccalaureate",gen:"Thanaweya Amma",trk:"Choose track",note:"Thanaweya Amma subjects follow the familiar system; confirm with your school.",ex:"Mock exam (10 questions)",exr:"Exam result: ",exw:"Questions you missed:",hist:"Your latest results",calh:"🧮 Baccalaureate total calculator (out of 600)",calt:"Total: ",bk:"💾 Backup",bkn:"Export your data and keep the file; import it if you change device or clear the browser.",exp:"Export my data",imp:"Import"}};
+var PF={},EX=null;try{PF=JSON.parse(st().getItem("prof"))||{}}catch(e){}
+function subs(){if(!PF.t||PF.g==="1")return null;var T=TR[PF.s]&&TR[PF.s][PF.t];if(!T)return null;return PF.s==="bac"?CORE.concat(PF.g==="3"?T.s2.concat(T.s3):T.s2):T.m}
+function vis2(s){var u=subs();return!u||u.indexOf(s)>=0}
+function vis(k){var u=subs();return!u||k===14||u.some(function(s){return(SK[s]||[]).indexOf(k)>=0})}
+function pfS(){PF={g:$("pgr").value,s:$("psy").value,t:$("ptk").value};sv("prof",JSON.stringify(PF));qc=null;render()}
+$("pgr").onchange=$("ptk").onchange=pfS;$("psy").onchange=function(){$("ptk").value="";pfS()};
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function hR(){var H=[];try{H=JSON.parse(st().getItem("hist"))||[]}catch(e){}$("qhs").textContent=H.length?T3[lg].hist+": "+H.map(function(x){return x.c+"/"+x.t}).join(" · "):""}
+$("qex").onclick=function(){var f=$("qsel").value,p=sh(Q.filter(function(q){return f?q[0]===f:vis2(q[0])})).slice(0,10);if(!p.length)return;EX={q:p,i:0,a:[]};$("qsc").textContent="";exD()};
+function exD(){var t=T3[lg],b=$("qb");b.innerHTML="";$("qfb").textContent="";
+ if(EX.i>=EX.q.length){var c=0,w=[],H=[];EX.q.forEach(function(q,k){if(EX.a[k]===q[3])c++;else w.push(q)});
+  try{H=JSON.parse(st().getItem("hist"))||[]}catch(e){}H.unshift({c:c,t:EX.q.length});sv("hist",JSON.stringify(H.slice(0,5)));
+  var p=document.createElement("p");p.style.fontWeight="800";p.textContent=t.exr+c+"/"+EX.q.length;b.appendChild(p);
+  if(w.length){var u=document.createElement("p");u.textContent=t.exw;b.appendChild(u);w.forEach(function(q){var d=document.createElement("div");d.style.margin="4px 0";d.textContent=q[1]+" ← "+q[2][q[3]];b.appendChild(d)})}
+  EX=null;hR();return}
+ var q=EX.q[EX.i],h=document.createElement("p");h.style.fontWeight="800";h.textContent=(EX.i+1)+"/"+EX.q.length+" — "+q[0]+": "+q[1];b.appendChild(h);
+ q[2].forEach(function(o,i){var x=document.createElement("button");x.className="qo";x.textContent=o;x.onclick=function(){EX.a[EX.i]=i;EX.i++;exD()};b.appendChild(x)})}
+function cS(){var s=0,v=[];[].forEach.call($("cin").querySelectorAll("input"),function(x,i){v[i]=x.value;s+=Math.min(100,Math.max(0,+x.value||0))});sv("calc",JSON.stringify(v));$("cout").textContent=T3[lg].calt+s+" / 600 — "+(s/6).toFixed(1)+"%"}
+function render3(){var t=T3[lg];["pfh","pfs","calh","bk","bkn"].forEach(function(k){$(k).textContent=t[k]});
+ $("qex").textContent=t.ex;$("bex").textContent=t.exp;$("bimt").textContent=t.imp;
+ $("pgr").innerHTML=[1,2,3].map(function(g){return'<option value="'+g+'">'+t["g"+g]+"</option>"}).join("");$("pgr").value=PF.g||"2";
+ $("psy").innerHTML='<option value="bac">'+t.bac+'</option><option value="gen">'+t.gen+"</option>";$("psy").value=PF.s||"bac";
+ var S=$("psy").value,o='<option value="">'+t.trk+"</option>";Object.keys(TR[S]).forEach(function(k){o+='<option value="'+k+'">'+TR[S][k].n+"</option>"});
+ $("ptk").innerHTML=o;$("ptk").value=TR[S][PF.t]?PF.t:"";$("pnote").textContent=S==="gen"?t.note:"";
+ var T=TR.bac[PF.t],L=CORE.slice(),V=[];if(T){L.push(T.s2.join(" / "));L=L.concat(T.s3)}else L.push("1","2","3");
+ try{V=JSON.parse(st().getItem("calc"))||[]}catch(e){}
+ var b=$("cin");b.innerHTML="";L.forEach(function(n,i){var r=document.createElement("div"),s=document.createElement("span"),x=document.createElement("input");r.className="cr";s.textContent=n;x.type="number";x.min=0;x.max=100;x.value=V[i]||"";x.oninput=cS;r.appendChild(s);r.appendChild(x);b.appendChild(r)});
+ cS();hR()}
+$("bex").onclick=function(){var o={};try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);o[k]=localStorage.getItem(k)}}catch(e){}
+ var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(o)],{type:"application/json"}));a.download="student-guide-backup.json";a.click()};
+$("bim").onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var o=JSON.parse(r.result);Object.keys(o).forEach(function(k){if(/^(plan|prof|calc|hist|pd|pm|wk)/.test(k))sv(k,String(o[k]))});location.reload()}catch(x){}};r.readAsText(f)};
+if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0)navigator.serviceWorker.register("sw.js").catch(function(){});
+ti=Math.floor(Math.random()*6);render();
+(function(){
+ var els=document.querySelectorAll("main h2,main .sub,main .panel,main .needs");
+ if(!("IntersectionObserver" in window)){return}
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
+ els.forEach(function(el){el.classList.add("rv");io.observe(el)});
+})();
+</script>
+</body>
+</html>
